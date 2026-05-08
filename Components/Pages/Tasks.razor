@@ -1,0 +1,42 @@
+@page "/tasks"
+@rendermode InteractiveServer
+
+<h1>Tasks</h1>
+
+<ul>
+
+@foreach(var task in tasks){
+    <li>
+        <p>@task.Title</p>
+        <input type="checkbox" @bind="task.Completed">
+
+
+     </li>
+}
+
+</ul>
+
+
+<input @bind="newTaskTitle" placeholder="Title"/>
+<input type="text" @bind="newTaskDescription"  placeholder="Description"/>
+<input type="number" @bind="completionPoints" placeholder="Rward Points"/>
+<button @onclick="AddTask">Add task</button>
+
+@code{
+
+    private List<TaskItem> tasks = new();
+
+    string newTaskTitle = "";
+    string newTaskDescription = "";
+    bool completed = false;
+
+    int completionPoints = 0;
+
+
+
+
+    void AddTask(){
+        tasks.Add(new TaskItem { Title = newTaskTitle, Description = newTaskDescription, Completed = completed, RewardPoints = completionPoints  });
+    }
+
+}

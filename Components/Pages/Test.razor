@@ -1,0 +1,29 @@
+@page "/test"
+@rendermode InteractiveServer
+
+<PageTitle>Test</PageTitle>
+
+<div class="testPageWrapper">
+    <div >
+        <h1>Test</h1>
+        <h2>@displayText</h2>
+    </div>
+    <button @onclick="changeText">Change text</button>
+</div>
+
+@code{
+
+private string displayText = "Mygg";
+
+public void changeText(){
+
+if(displayText == "y"){
+    displayText = "V";
+}
+else{
+ displayText = "y";
+}
+    
+}
+
+}
