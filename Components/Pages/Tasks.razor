@@ -1,16 +1,27 @@
 @page "/tasks"
 @rendermode InteractiveServer
+@using MySqlConnector
+@inject MySqlConnection Connection
 
 <h1>Tasks</h1>
+<p>DB Status: @dbStatus</p>
 
+<h3>Reward points earned: @TotalPoints</h3>
 <ul>
 
 @foreach(var task in tasks){
-    <li>
-        <p>@task.Title</p>
-        <input type="checkbox" @bind="task.Completed">
-
-
+    <li class="taskList">
+        <div class="taskContainer">
+        <p>Title: @task.Title</p>
+        <p>Description: @task.Description</p>
+        <p>Rewardpoints: @task.RewardPoints</p>
+        <div class="completedTask">
+            <p>Completed?</p>
+            <br>
+             <input type="checkbox" placeholder="Completed?" class="completedInput" checked="@task.Completed" @onchange="() => ToggleCompleted(task)">
+        </div>
+        </div>
+        
      </li>
 }
 
@@ -20,7 +31,10 @@
 <input @bind="newTaskTitle" placeholder="Title"/>
 <input type="text" @bind="newTaskDescription"  placeholder="Description"/>
 <input type="number" @bind="completionPoints" placeholder="Rward Points"/>
-<button @onclick="AddTask">Add task</button>
+<button @onclick="AddTask" class="k">
+    <span class="bi bi-plus-circle-fill" aria-hidden="true"></span>
+    Add task
+</button>
 
 @code{
 
@@ -32,11 +46,30 @@
 
     int completionPoints = 0;
 
+    string dbStatus = "Not tested";
 
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await Connection.OpenAsync();
+            dbStatus = "✅ Connected to MariaDB!";
+            await Connection.CloseAsync();
+        }
+        catch (Exception ex)
+        {
+            dbStatus = $"❌ Failed: {ex.Message}";
+        }
+    }
 
+    int TotalPoints => tasks.Where(t => t.Completed).Sum(t => t.RewardPoints);
 
     void AddTask(){
         tasks.Add(new TaskItem { Title = newTaskTitle, Description = newTaskDescription, Completed = completed, RewardPoints = completionPoints  });
+    }
+
+    void ToggleCompleted(TaskItem task){
+        task.Completed = !task.Completed;
     }
 
 }
