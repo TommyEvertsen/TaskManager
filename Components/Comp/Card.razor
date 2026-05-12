@@ -1,0 +1,16 @@
+<div class="cardWrapper">
+<div class="card">
+    <div class="cardTitle">@Title</div>
+    <div class="cardRewardPoints">@RewardPoints points</div>
+    <div class="cardDescription">@Description</div>
+    <div class="cardCompleted">@(Completed ? "✅ Done" : "❌ Not done")</div>
+     
+</div>
+</div>
+
+@code {
+    [Parameter] public string? Title { get; set; }
+    [Parameter] public string? Description { get; set; }
+    [Parameter] public int RewardPoints { get; set; }
+    [Parameter] public bool Completed { get; set; }
+}

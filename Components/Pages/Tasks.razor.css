@@ -1,5 +1,60 @@
-.completedTask {
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+hr {
+  margin: 0.2rem;
+}
+
+.taskContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.card {
+  border: 1px solid black;
+  border-radius: 15px;
+  width: 15rem;
+  margin-top: 25px;
+}
+
+.top {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  background-color: #ff69b4;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  font-size: 1.2rem;
+}
+
+.title {
+}
+
+.description {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+}
+
+.completed {
   display: flex;
   align-items: baseline;
   gap: 6px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.createTaskContainer {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
 }

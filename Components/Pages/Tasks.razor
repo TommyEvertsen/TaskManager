@@ -7,34 +7,45 @@
 <p>DB Status: @dbStatus</p>
 
 <h3>Reward points earned: @TotalPoints</h3>
-<ul>
 
+
+<div class="taskContainer">
 @foreach(var task in tasks){
-    <li class="taskList">
-        <div class="taskContainer">
-        <p>Title: @task.Title</p>
-        <p>Description: @task.Description</p>
-        <p>Rewardpoints: @task.RewardPoints</p>
-        <div class="completedTask">
-            <p>Completed?</p>
-            <br>
-             <input type="checkbox" placeholder="Completed?" class="completedInput" checked="@task.Completed" @onchange="() => ToggleCompleted(task)">
+        <ul>
+        <li class="taskList">
+        <div class="cardWrapper">
+            <div class="card">
+                <div class="top">
+                    <div class="title">@task.Title</div>
+                    <div class="rewardPoints"> <span class="bi bi-heart" aria-hidden="true"></span> @task.RewardPoints</div>
+                </div>
+               
+                <div class="description">@task.Description</div>
+                <hr>
+                <div class="completed">
+                    <p>Completed? </p>
+                     <input type="checkbox"  class="completedInput" checked="@task.Completed" @onchange="() => ToggleCompleted(task)">
+                </div>
+            </div>
         </div>
-        </div>
-        
      </li>
+     </ul>
 }
+</div>
 
-</ul>
+ 
 
-
+<div class="createTaskContainer">
 <input @bind="newTaskTitle" placeholder="Title"/>
 <input type="text" @bind="newTaskDescription"  placeholder="Description"/>
 <input type="number" @bind="completionPoints" placeholder="Rward Points"/>
-<button @onclick="AddTask" class="k">
-    <span class="bi bi-plus-circle-fill" aria-hidden="true"></span>
+<br>
+<button @onclick="AddTask" class="loveButton">
+    <span class="bi bi-suit-heart" aria-hidden="true"></span>
     Add task
 </button>
+</div>
+
 
 @code{
 
